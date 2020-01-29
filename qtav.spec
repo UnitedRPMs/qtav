@@ -107,7 +107,7 @@ rm -rf  %{buildroot}/%{_datadir}/doc
 
 # Appdata
 mkdir -p %{buildroot}/%{_datadir}/{applications,metainfo}
-install -Dm 0644 %{S:1} %{buildroot}/%{_datadir}/metainfo/%{name}.appdata.xml
+install -Dm 0644 %{S:1} %{buildroot}/%{_metainfodir}/%{name}.appdata.xml
 
 # desktop fix
 sed -i 's|/usr/bin/Player|/usr/lib64/qt5/bin/Player|g' %{buildroot}/%{_datadir}/applications/Player.desktop
@@ -118,7 +118,7 @@ sed -i 's|Exec=QMLPlayer|Exec=/usr/lib64/qt5/bin/QMLPlayer|g' %{buildroot}/%{_da
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/Player.desktop
 desktop-file-validate %{buildroot}%{_datadir}/applications/QMLPlayer.desktop
-appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/metainfo/*.appdata.xml
+appstream-util validate-relax --nonet %{buildroot}/%{_metainfodir}/*.appdata.xml
 
 
 %files
@@ -134,7 +134,7 @@ appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/metainfo/*.appdat
 %{_libdir}/libQtAVWidgets.so.*
 %{_libdir}/qt5/mkspecs/
 %{_libdir}/qt5/qml/QtAV/
-%{_datadir}/metainfo/qtav.appdata.xml
+%{_metainfodir}/qtav.appdata.xml
 
 %files devel
 %{_includedir}/qt5/QtAV/
