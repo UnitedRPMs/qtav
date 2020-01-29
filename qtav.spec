@@ -112,7 +112,6 @@ rm -rf  %{buildroot}/%{_datadir}/doc
 %{_datadir}/applications/QMLPlayer.desktop
 %{_datadir}/icons/hicolor/scalable/apps/QtAV.svg
 %{_libdir}/libQtAV.so.*
-%{_libdir}/libQtAV.so.*
 %{_libdir}/libQtAVWidgets.prl
 %{_libdir}/libQtAVWidgets.so.*
 %{_libdir}/qt5/mkspecs/
