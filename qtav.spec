@@ -30,13 +30,16 @@ License:        LGPLv2 AND GPLv3
 Group:          Applications/Multimedia
 URL:            http://qtav.org/
 Source0:	https://github.com/wang-bin/QtAV/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1:	qtav.appdata.xml
 
 BuildRequires:  ImageMagick
 BuildRequires:  dos2unix
 BuildRequires:  hicolor-icon-theme
+BuildRequires:	desktop-file-utils
 BuildRequires:  kf5-filesystem
 BuildRequires:  pkgconfig
 BuildRequires:  portaudio-devel
+BuildRequires:  libappstream-glib
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Gui)
 BuildRequires:  pkgconfig(Qt5OpenGL)
@@ -102,6 +105,21 @@ find %{buildroot} -name \*.a -exec rm {} \;
 # duplicate files
 rm -rf  %{buildroot}/%{_datadir}/doc
 
+# Appdata
+mkdir -p %{buildroot}/%{_datadir}/{applications,metainfo}
+install -Dm 0644 %{S:1} %{buildroot}/%{_metainfodir}/%{name}.appdata.xml
+
+# desktop fix
+sed -i 's|/usr/bin/Player|/usr/lib64/qt5/bin/Player|g' %{buildroot}/%{_datadir}/applications/Player.desktop
+sed -i 's|Exec=Player|Exec=/usr/lib64/qt5/bin/Player|g' %{buildroot}/%{_datadir}/applications/Player.desktop
+sed -i 's|/usr/bin/QMLPlayer|/usr/lib64/qt5/bin/QMLPlayer|g' %{buildroot}/%{_datadir}/applications/QMLPlayer.desktop
+sed -i 's|Exec=QMLPlayer|Exec=/usr/lib64/qt5/bin/QMLPlayer|g' %{buildroot}/%{_datadir}/applications/QMLPlayer.desktop
+
+%check
+desktop-file-validate %{buildroot}%{_datadir}/applications/Player.desktop
+desktop-file-validate %{buildroot}%{_datadir}/applications/QMLPlayer.desktop
+appstream-util validate-relax --nonet %{buildroot}/%{_metainfodir}/*.appdata.xml
+
 
 %files
 %license gpl-3.0* lgpl-2.1*
@@ -116,6 +134,7 @@ rm -rf  %{buildroot}/%{_datadir}/doc
 %{_libdir}/libQtAVWidgets.so.*
 %{_libdir}/qt5/mkspecs/
 %{_libdir}/qt5/qml/QtAV/
+%{_datadir}/metainfo/qtav.appdata.xml
 
 %files devel
 %{_includedir}/qt5/QtAV/
