@@ -16,7 +16,7 @@
 #
 
 %global debug_package %{nil}
-%global commit0 df5bf45926c15960e2a75822bf051c8431d91385
+%global commit0 768dbd6ff2c9994cc10f2dc9b7764a8cca417e9e
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
@@ -24,13 +24,13 @@
 
 Name:           qtav
 Version:        1.13.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Qt multimedia framework
 License:        LGPLv2 AND GPLv3
 Group:          Applications/Multimedia
 URL:            http://qtav.org/
 Source0:	https://github.com/wang-bin/QtAV/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source1:	qtav.appdata.xml
+Source1:	org.qtav.qtav.metainfo.xml
 
 BuildRequires:  ImageMagick
 BuildRequires:  dos2unix
@@ -106,14 +106,13 @@ find %{buildroot} -name \*.a -exec rm {} \;
 rm -rf  %{buildroot}/%{_datadir}/doc
 
 # Appdata
-mkdir -p %{buildroot}/%{_datadir}/{applications,metainfo}
-install -Dm 0644 %{S:1} %{buildroot}/%{_metainfodir}/%{name}.appdata.xml
+install -Dm 0644 %{S:1} %{buildroot}/%{_metainfodir}/org.qtav.qtav.metainfo.xml
 
-# desktop fix
-sed -i 's|/usr/bin/Player|/usr/lib64/qt5/bin/Player|g' %{buildroot}/%{_datadir}/applications/Player.desktop
-sed -i 's|Exec=Player|Exec=/usr/lib64/qt5/bin/Player|g' %{buildroot}/%{_datadir}/applications/Player.desktop
-sed -i 's|/usr/bin/QMLPlayer|/usr/lib64/qt5/bin/QMLPlayer|g' %{buildroot}/%{_datadir}/applications/QMLPlayer.desktop
-sed -i 's|Exec=QMLPlayer|Exec=/usr/lib64/qt5/bin/QMLPlayer|g' %{buildroot}/%{_datadir}/applications/QMLPlayer.desktop
+install -d %{buildroot}/%{_bindir}
+pushd %{buildroot}/%{_bindir}
+ln -s %{_libdir}/qt5/bin/Player Player
+ln -s %{_libdir}/qt5/bin/QMLPlayer QMLPlayer
+popd
 
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/Player.desktop
@@ -124,6 +123,8 @@ appstream-util validate-relax --nonet %{buildroot}/%{_metainfodir}/*.appdata.xml
 %files
 %license gpl-3.0* lgpl-2.1*
 %doc Changelog README*
+%{_bindir}/Player
+%{_bindir}/QMLPlayer
 %{_libdir}/qt5/bin/Player
 %{_libdir}/qt5/bin/QMLPlayer
 %{_datadir}/applications/Player.desktop
@@ -134,7 +135,7 @@ appstream-util validate-relax --nonet %{buildroot}/%{_metainfodir}/*.appdata.xml
 %{_libdir}/libQtAVWidgets.so.*
 %{_libdir}/qt5/mkspecs/
 %{_libdir}/qt5/qml/QtAV/
-%{_metainfodir}/qtav.appdata.xml
+%{_metainfodir}/org.qtav.qtav.metainfo.xml
 
 %files devel
 %{_includedir}/qt5/QtAV/
@@ -147,5 +148,9 @@ appstream-util validate-relax --nonet %{buildroot}/%{_metainfodir}/*.appdata.xml
 
 
 %changelog
+
+* Sun Apr 05 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.13.0-2
+- Fix paths
+
 * Tue Jan 28 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.13.0-1
 - Initial build

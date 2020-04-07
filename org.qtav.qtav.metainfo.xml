@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.qtav.qtav</id>
+  
+  <name>QtAV</name>
+  <summary>Qt multimedia framework</summary>
+  
+  <metadata_license>FSFAP</metadata_license>
+  <project_license>LGPL-2.0+</project_license>
+  
+  <description>
+    <p>
+      QtAV is a multimedia playback library based on Qt and FFmpeg. It can help facilitate writing a player application.
+    </p>
+  </description>
+  
+  <launchable type="desktop-id">Player.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://camo.githubusercontent.com/9f66de338232b77ff658d489005869a196d5efc4/687474703a2f2f7777772e717461762e6f72672f73637265656e73686f74732f514d4c506c617965722d707265766965772d7562756e74752e6a7067</image>
+    </screenshot>
+  </screenshots>
+</component>
