@@ -117,7 +117,7 @@ popd
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/Player.desktop
 desktop-file-validate %{buildroot}%{_datadir}/applications/QMLPlayer.desktop
-appstream-util validate-relax --nonet %{buildroot}/%{_metainfodir}/*.appdata.xml
+appstream-util validate-relax --nonet %{buildroot}/%{_metainfodir}/org.qtav.qtav.metainfo.xml
 
 
 %files
