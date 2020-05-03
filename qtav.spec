@@ -16,7 +16,7 @@
 #
 
 %global debug_package %{nil}
-%global commit0 768dbd6ff2c9994cc10f2dc9b7764a8cca417e9e
+%global commit0 11a13bf0717dff5273c6abf2d42d5fee13796f8e
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
@@ -24,7 +24,7 @@
 
 Name:           qtav
 Version:        1.13.0
-Release:        2%{?dist}
+Release:        7%{?dist}
 Summary:        Qt multimedia framework
 License:        LGPLv2 AND GPLv3
 Group:          Applications/Multimedia
@@ -133,7 +133,7 @@ appstream-util validate-relax --nonet %{buildroot}/%{_metainfodir}/org.qtav.qtav
 %{_libdir}/libQtAV.so.*
 %{_libdir}/libQtAVWidgets.prl
 %{_libdir}/libQtAVWidgets.so.*
-%{_libdir}/qt5/mkspecs/
+
 %{_libdir}/qt5/qml/QtAV/
 %{_metainfodir}/org.qtav.qtav.metainfo.xml
 
@@ -142,12 +142,15 @@ appstream-util validate-relax --nonet %{buildroot}/%{_metainfodir}/org.qtav.qtav
 %{_includedir}/qt5/QtAVWidgets/
 %{_libdir}/libQtAV.so
 %{_libdir}/libQtAVWidgets.so
-%{_libdir}/qt5/mkspecs/
+
 %{_libdir}/libQtAVWidgets.prl
 %{_libdir}/libQtAV.prl
 
 
 %changelog
+
+* Fri May 01 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.13.0-7
+- Updated to current commit
 
 * Sun Apr 05 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.13.0-2
 - Fix paths
