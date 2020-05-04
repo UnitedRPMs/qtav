@@ -142,9 +142,9 @@ appstream-util validate-relax --nonet %{buildroot}/%{_metainfodir}/org.qtav.qtav
 %{_includedir}/qt5/QtAVWidgets/
 %{_libdir}/libQtAV.so
 %{_libdir}/libQtAVWidgets.so
-
 %{_libdir}/libQtAVWidgets.prl
 %{_libdir}/libQtAV.prl
+%{_libdir}/qt5/mkspecs/
 
 
 %changelog
