@@ -24,7 +24,7 @@
 
 Name:           qtav
 Version:        1.13.0
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        Qt multimedia framework
 License:        LGPLv2 AND GPLv3
 Group:          Applications/Multimedia
@@ -62,7 +62,7 @@ BuildRequires:  pkgconfig(libswscale)
 BuildRequires:  pkgconfig(libva)
 BuildRequires:  pkgconfig(openal)
 BuildRequires:  pkgconfig(xv)
-BuildRequires:	ffmpeg-devel 
+BuildRequires:	ffmpeg-devel >= 4.3 
 
 %description
 QtAV is a multimedia playback library based on Qt and FFmpeg. It can help
@@ -148,6 +148,9 @@ appstream-util validate-relax --nonet %{buildroot}/%{_metainfodir}/org.qtav.qtav
 
 
 %changelog
+
+* Sun Jul 05 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.13.0-8
+- Rebuilt for ffmpeg
 
 * Fri May 01 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.13.0-7
 - Updated to current commit
