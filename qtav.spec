@@ -16,10 +16,10 @@
 #
 
 #define _legacy_common_support 1
-%global _lto_cflags %{nil}
+#global _lto_cflags %{nil}
 
 
-%global debug_package %{nil}
+#global debug_package %{nil}
 %global commit0 2a470d2a8d2fe22fae969bee5d594909a07b350a
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
@@ -100,17 +100,21 @@ done
 sed -i 's|/lib|/lib64|g' CMakeLists.txt
 
 %build
-mkdir -p %{_target_platform}; cd %{_target_platform}
-cmake -DCMAKE_INSTALL_PREFIX="/usr" -DCMAKE_INSTALL_LIBDIR=%{_libdir} -DBUILD_PLAYERS=ON -DBUILD_QT5OPENGL=ON -DHAVE_PORTAUDIO=ON -DHAVE_PULSE=ON -DHAVE_VAAPI=ON -DBUILD_TESTS=OFF -DBUILD_EXAMPLES=OFF ..
+mkdir -p %{_target_platform}
+%cmake \
+          -B %{_target_platform} \
+          -DBUILD_PLAYERS=ON \
+          -DBUILD_QT5OPENGL=ON \
+          -DHAVE_PORTAUDIO=ON \
+          -DHAVE_PULSE=ON \
+          -DHAVE_VAAPI=ON \
+          -DBUILD_TESTS=OFF \
+          -DBUILD_EXAMPLES=OFF 
 		
-#pushd %{_target_platform}
-
-%make_build
+%make_build -C %{_target_platform}
 
 %install
-pushd %{_target_platform}
-%make_install INSTALL_ROOT=%{buildroot}
-popd
+%make_install -C %{_target_platform}
 
 
 find %{buildroot} -name \*.a -exec rm {} \;
