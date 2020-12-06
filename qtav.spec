@@ -28,7 +28,7 @@
 
 Name:           qtav
 Version:        1.13.0
-Release:        9%{?dist}
+Release:        10%{?dist}
 Summary:        Qt multimedia framework
 License:        LGPLv2 AND GPLv3
 Group:          Applications/Multimedia
@@ -168,6 +168,9 @@ appstream-util validate-relax --nonet %{buildroot}/%{_metainfodir}/org.qtav.qtav
 
 
 %changelog
+
+* Sat Dec 05 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.13.0-10
+- Rebuilt for qt5-qtdeclarative
 
 * Mon Oct 05 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.13.0-9
 - Updated to current commit
