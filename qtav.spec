@@ -1,7 +1,7 @@
 #
 # spec file for package QtAV
 #
-# Copyright (c) 2020 UnitedRPMs
+# Copyright (c) 2022 UnitedRPMs
 #
 # All modifications and additions to the file contributed by third parties
 # remain the property of their copyright owners, unless otherwise agreed
@@ -20,7 +20,7 @@
 
 
 #global debug_package %{nil}
-%global commit0 2a470d2a8d2fe22fae969bee5d594909a07b350a
+%global commit0 3b937991afce248648836ae811324d4051b31def
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
@@ -28,7 +28,7 @@
 
 Name:           qtav
 Version:        1.13.0
-Release:        10%{?dist}
+Release:        11%{?dist}
 Summary:        Qt multimedia framework
 License:        LGPLv2 AND GPLv3
 Group:          Applications/Multimedia
@@ -38,6 +38,7 @@ Source1:	org.qtav.qtav.metainfo.xml
 Source2:	QtAV.svg
 
 BuildRequires:	cmake
+BuildRequires:  gcc-c++
 BuildRequires:  ImageMagick
 BuildRequires:  dos2unix
 BuildRequires:  hicolor-icon-theme
@@ -68,7 +69,7 @@ BuildRequires:  pkgconfig(libswscale)
 BuildRequires:  pkgconfig(libva)
 BuildRequires:  pkgconfig(openal)
 BuildRequires:  pkgconfig(xv)
-BuildRequires:	ffmpeg-devel >= 4.3 
+BuildRequires:	ffmpeg4-devel  
 
 %description
 QtAV is a multimedia playback library based on Qt and FFmpeg. It can help
@@ -86,7 +87,7 @@ This package contains the header development files for building some QtAV
 applications using QtAV headers.
 
 %prep
-%autosetup -n QtAV-%{commit0}
+%autosetup -n QtAV-%{commit0} -p1
 
 # We need put the path of our ffmpeg
 find . -type f -name \*.pro | while read FILE; do
@@ -168,6 +169,9 @@ appstream-util validate-relax --nonet %{buildroot}/%{_metainfodir}/org.qtav.qtav
 
 
 %changelog
+
+* Sat Feb 05 2022 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.13.0-11
+- Rebuilt for ffmpeg
 
 * Sat Dec 05 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.13.0-10
 - Rebuilt for qt5-qtdeclarative
