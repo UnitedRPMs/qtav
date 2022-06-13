@@ -20,7 +20,7 @@
 
 
 #global debug_package %{nil}
-%global commit0 3b937991afce248648836ae811324d4051b31def
+%global commit0 fdc613dc99304f208cff0bb25b3ded14bb993237
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
@@ -28,7 +28,7 @@
 
 Name:           qtav
 Version:        1.13.0
-Release:        11%{?dist}
+Release:        12%{?dist}
 Summary:        Qt multimedia framework
 License:        LGPLv2 AND GPLv3
 Group:          Applications/Multimedia
@@ -57,15 +57,7 @@ BuildRequires:  pkgconfig(Qt5Svg)
 BuildRequires:  pkgconfig(Qt5Widgets)
 BuildRequires:  pkgconfig(egl)
 BuildRequires:  pkgconfig(libass)
-BuildRequires:  pkgconfig(libavcodec)
-BuildRequires:  pkgconfig(libavdevice)
-BuildRequires:  pkgconfig(libavfilter)
-BuildRequires:  pkgconfig(libavformat)
-BuildRequires:  pkgconfig(libavresample)
-BuildRequires:  pkgconfig(libavutil)
 BuildRequires:  pkgconfig(libpulse) >= 1.0
-BuildRequires:  pkgconfig(libswresample)
-BuildRequires:  pkgconfig(libswscale)
 BuildRequires:  pkgconfig(libva)
 BuildRequires:  pkgconfig(openal)
 BuildRequires:  pkgconfig(xv)
@@ -169,6 +161,9 @@ appstream-util validate-relax --nonet %{buildroot}/%{_metainfodir}/org.qtav.qtav
 
 
 %changelog
+
+* Sat Jun 11 2022 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.13.0-12
+- Updated to current commit
 
 * Sat Feb 05 2022 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.13.0-11
 - Rebuilt for ffmpeg
